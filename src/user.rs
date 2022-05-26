@@ -1,7 +1,7 @@
-use dynomite::Item;
-use serde::{Deserialize, Serialize};
 use crate::patreon_status::PatronStatus;
 use crate::role::Role;
+use dynomite::Item;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Item, PartialEq, Serialize)]
 pub struct User {

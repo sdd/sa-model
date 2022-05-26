@@ -16,3 +16,9 @@ pub struct Connection {
     pub id: String,
     pub ttl_expire_at: i64,
 }
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ApiGatewayWebsocketMessage<T> {
+    pub action: String,
+    pub data: T,
+}

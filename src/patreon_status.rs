@@ -1,9 +1,9 @@
-use std::fmt;
 use dynomite::Attribute;
 use serde::{Deserialize, Serialize};
+use std::fmt;
+use std::str::FromStr;
 
-
-#[derive(Attribute, Clone, Copy, Debug, Deserialize, PartialEq, Serialize)]
+#[derive(Attribute, Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[non_exhaustive]
 pub enum PatronStatus {
     #[serde(alias = "active_patron")]
@@ -14,15 +14,18 @@ pub enum PatronStatus {
     Former,
 }
 
-impl PatronStatus {
-    pub fn from_str(role: &str) -> PatronStatus {
-        match role {
-            "Active" => PatronStatus::Active,
-            "active_patron" => PatronStatus::Active,
-            "Former" => PatronStatus::Former,
-            "former_patron" => PatronStatus::Former,
-            "declined_patron" => PatronStatus::Declined,
-            _ => PatronStatus::Declined,
+impl FromStr for PatronStatus {
+    type Err = ();
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "Active" => Ok(PatronStatus::Active),
+            "active_patron" => Ok(PatronStatus::Active),
+            "Former" => Ok(PatronStatus::Former),
+            "former_patron" => Ok(PatronStatus::Former),
+            "declined_patron" => Ok(PatronStatus::Declined),
+            "Declined" => Ok(PatronStatus::Declined),
+            _ => Err(()),
         }
     }
 }
