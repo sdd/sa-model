@@ -5,6 +5,7 @@ pub mod sns;
 pub mod solvastro;
 pub mod user;
 pub mod websocket;
+pub mod claims;
 
 #[cfg(test)]
 mod tests {
